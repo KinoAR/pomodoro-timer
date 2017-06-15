@@ -1,0 +1,38 @@
+body {
+  background-color: black;
+  color:white;
+}
+
+#displayTimer {
+  font-size: 10em;
+}
+
+.title-area {
+  color: black;
+  background-color:darkgray;
+}
+
+.settings {
+  width: 600px !important;
+  background-color: darkgray;
+  padding: 10px 50px;
+  border: 1px solid white;
+  box-shadow: 5px 5px 3px black;
+  position: absolute;
+  top:50%;
+  left:50%;
+  margin-left: -300px;
+  /* display: none; */
+}
+
+input.full-width {
+  width: 100% !important;
+} 
+
+div.extra-padding {
+  padding: 10px 10px;
+}
+
+div.close-button {
+  margin-left: 450px;
+}
