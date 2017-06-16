@@ -4,8 +4,6 @@ import Filter from './filter.js';
 import Settings from './components/settings.vue';
 window.pomodoroTimer = pomodoroTimer;
 
-Vue.component('settings-component', Settings);
-
 const app = new Vue({
   el: '#app',
   data: {
@@ -16,6 +14,7 @@ const app = new Vue({
     { title: 'Long Break', method: 'hitTest' }],
     currentTime: pomodoroTimer.getCurrentTime(),
     intervalId: null,
+    showSettingsWindow: false,
   },
   methods: {
     setTime(timeType) {
@@ -52,5 +51,23 @@ const app = new Vue({
       pomodoroTimer.resetTimer();
       this.currentTime = pomodoroTimer.getCurrentTime();
     },
+    openSettingsWindow() {
+      this.showSettingsWindow = true;
+    },
+    closeSettingsWindow() {
+      this.showSettingsWindow = false;
+      console.log("Fired");
+    }
+  },
+  computed: {
+    showSet1Window: function () {
+      let a = !!this.showSettingsWindow;
+      return a;
+    }
+  },
+  components: {
+    'settings-component': Settings,
   }
 });
+
+console.log(app);

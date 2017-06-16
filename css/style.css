@@ -10,6 +10,7 @@ body {
 .title-area {
   color: black;
   background-color:darkgray;
+  padding: 32px 0px;
 }
 
 .settings {

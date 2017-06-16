@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showWindow" class="settings">
+  <div class="settings">
     <div class="row close-button justify-content-end"> 
       <div class="col align-self-end">
         <button v-on:click="closeWindow" class="btn btn-warning" type="button">  <i class="fa fa-times" aria-hidden="true"></i> </button>
@@ -48,9 +48,10 @@
 <script>
 export default {
   name: 'settings-component',
+  props: ['showSetWindow'],
   data() {
     return {
-      showWindow: true,
+
     }
   }, 
   methods: {
@@ -66,7 +67,7 @@ export default {
     },
 
     closeWindow() {
-      this.showWindow = false;
+      this.$emit('close-settings-window');
     }
   }
 }

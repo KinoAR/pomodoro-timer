@@ -13,6 +13,9 @@
           <div class="container">
             <h1 class="display-3">{{ title }}</h1>
             <p class="lead">A simple and useful pomodoro-timer!</p>
+            <div class="row">
+              <div class="col"> <button v-on:click="openSettingsWindow" class="btn btn-primary"> Settings </button> </div>
+            </div>
           </div>
         </div>
 
@@ -49,7 +52,7 @@
           </button>
         </div>
       </div>
-      <settings-component></settings-component>
+      <settings-component v-if="showSettingsWindow"v-on:close-settings-window="closeSettingsWindow"></settings-component>
     </div>
     <script src="./node_modules/vue/dist/vue.js"> </script>
     <!-- <script src="bin/bundle.js"></script> -->
