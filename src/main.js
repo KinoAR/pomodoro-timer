@@ -60,10 +60,7 @@ const app = new Vue({
     }
   },
   computed: {
-    showSet1Window: function () {
-      let a = !!this.showSettingsWindow;
-      return a;
-    }
+
   },
   components: {
     'settings-component': Settings,
