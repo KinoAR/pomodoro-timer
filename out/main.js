@@ -52,11 +52,22 @@ var app = new Vue({
         pomodoroTimer.setCurrentTime(pomodoroTimer.getCurrentTime() - 1);
         _this.currentTime = pomodoroTimer.getCurrentTime();
         _this.processTimerStop(pomodoroTimer);
+        _this.updateDocumentTitle();
       }, 1000);
     },
     stopTimer: function stopTimer() {
       console.log("Timer stopped");
       clearInterval(this.intervalId);
+    },
+    updateDocumentTitle: function updateDocumentTitle() {
+      if (this.currentTime > 0) {
+        var value = this.currentTime;
+        var min = Math.floor(value / 60);
+        var seconds = value % 60;
+        document.title = (min < 10 ? '0' + min : min) + ':' + (seconds < 10 ? '0' + seconds : seconds) + ' - ' + this.title;
+      } else {
+        document.title = '' + this.title;
+      }
     },
     processTimerStop: function processTimerStop(timer) {
       if (timer.getCurrentTime() === 0) {

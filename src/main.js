@@ -39,12 +39,23 @@ const app = new Vue({
         pomodoroTimer.setCurrentTime(pomodoroTimer.getCurrentTime() - 1);
         this.currentTime = pomodoroTimer.getCurrentTime();
         this.processTimerStop(pomodoroTimer);
+        this.updateDocumentTitle();
       }, 1000);
     },
     stopTimer() {
       console.log("Timer stopped");
       clearInterval(this.intervalId);
     }, 
+    updateDocumentTitle() {
+      if(this.currentTime > 0) {
+        const value = this.currentTime;
+        let min = Math.floor(value / 60);
+        let seconds = value % 60;
+        document.title = `${ (min < 10) ? '0' + min : min }:${ (seconds < 10) ? '0' + seconds : seconds } - ${this.title}`;
+      } else {
+        document.title = `${this.title}`;
+      }
+    },
     processTimerStop(timer) {
       if(timer.getCurrentTime() === 0) {
         this.stopTimer();
