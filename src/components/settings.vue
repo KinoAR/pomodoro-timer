@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="extra-padding">
-            <button type="submit" v-on:click="updatePomodoroSettings" class="btn btn-primary"> Button </button>
+            <button type="submit" v-on:click="updatePomodoroSettings" class="btn btn-primary"> Confirm </button>
           </div>
         </form> 
       </div>

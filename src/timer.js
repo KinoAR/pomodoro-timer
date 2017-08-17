@@ -25,12 +25,16 @@ export default class PomodoroTimer {
   }
 
   setCurrentTime(value) {
-    if(this._currentTime > 0)
-      this._currentTime = value;
+    if(this._currentTime >= 0)
+      this._currentTime = (this._currentTime + value < 0)  ? 0 : value;
   }
 
   setState(state) {
     this._state = state;
+  }
+
+  getState(state) {
+    return this._state;
   }
 
   getCurrentTime() {

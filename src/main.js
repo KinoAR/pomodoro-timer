@@ -22,7 +22,6 @@ const app = new Vue({
       pomodoroTimer.setState(timeType);
       if(timeType == 'pomodoro') {
         time = pomodoroTimer.getPomodoroTime();
-        console.log(time);
       }
       if(timeType == 'shortbreak') {
         time =  pomodoroTimer.getShortBreakTime();
@@ -30,8 +29,8 @@ const app = new Vue({
       if(timeType == 'longbreak') {
         time =  pomodoroTimer.getLongBreakTime();
       }
+      console.log(time, timeType);
       pomodoroTimer.setCurrentTime(time);
-      console.log(pomodoroTimer.getCurrentTime());
       this.currentTime = pomodoroTimer.getCurrentTime();
     },
     startTimer() {
@@ -39,18 +38,38 @@ const app = new Vue({
       this.intervalId = setInterval(() => {
         pomodoroTimer.setCurrentTime(pomodoroTimer.getCurrentTime() - 1);
         this.currentTime = pomodoroTimer.getCurrentTime();
-        console.log(pomodoroTimer.getCurrentTime());
+        this.processTimerStop(pomodoroTimer);
       }, 1000);
     },
     stopTimer() {
       console.log("Timer stopped");
       clearInterval(this.intervalId);
+    }, 
+    processTimerStop(timer) {
+      if(timer.getCurrentTime() === 0) {
+        this.stopTimer();
+        this.updateState(pomodoroTimer);
+        this.playAudio();
+        this.resetTimer();
+      }
+    },
+    updateState(timer) {
+      if(pomodoroTimer.getState() === 'pomodoro')
+        pomodoroTimer.setState('shortbreak');
+      if(pomodoroTimer.getState() === 'shortbreak')
+        pomodoroTimer.setState('pomodoro');
+      if(pomodoroTimer.getState() === 'longbreak')
+        pomodoroTimer.setState('pomodoro');
+    },
+    playAudio() {
+      const audio = document.getElementById('beeperSound');
+      audio.play().catch(console.error);
     },
     resetTimer() {
       console.log("Timer reset");
       pomodoroTimer.resetTimer();
       this.currentTime = pomodoroTimer.getCurrentTime();
-    },
+    }, 
     openSettingsWindow() {
       this.showSettingsWindow = true;
     },
