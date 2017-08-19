@@ -5,10 +5,10 @@ export default class PomodoroTimer {
     this._longBreak = 15 * 60;
     this._currentTime = 0;
     this._state = 'pomodoro';
+    this._pomodoroCount = 0;
   }
 
   setPomodoroTime(value) {
-    console.log(value);
     this._pomodoro = this.setTime(value);
   } 
   
@@ -33,7 +33,16 @@ export default class PomodoroTimer {
     this._state = state;
   }
 
-  getState(state) {
+  setPomodoroCount(count) {
+    this._pomodoroCount = count;
+  }
+
+
+  getPomodoroCount() {
+    return this._pomodoroCount;
+  }
+
+  getState() {
     return this._state;
   }
 
@@ -54,6 +63,7 @@ export default class PomodoroTimer {
   }
 
   resetTimer() {
+    console.log(this._state);
     if(this._state == 'pomodoro')
       this._currentTime = this._pomodoro;
     if(this._state == 'shortbreak')

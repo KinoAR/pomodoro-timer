@@ -1,8 +1,9 @@
 import PomodoroTimer from './timer.js';
-const pomodoroTimer = new PomodoroTimer();
+const pTimer = new PomodoroTimer();
 import Filter from './filter.js';
 import Settings from './components/settings.vue';
-window.pomodoroTimer = pomodoroTimer;
+window.pomodoroTimer = pTimer;
+const pomodoroTimer = window.pomodoroTimer;
 
 const app = new Vue({
   el: '#app',
@@ -38,7 +39,7 @@ const app = new Vue({
       this.intervalId = setInterval(() => {
         pomodoroTimer.setCurrentTime(pomodoroTimer.getCurrentTime() - 1);
         this.currentTime = pomodoroTimer.getCurrentTime();
-        this.processTimerStop(pomodoroTimer);
+        this.processTimerStop();
         this.updateDocumentTitle();
       }, 1000);
     },
@@ -56,20 +57,26 @@ const app = new Vue({
         document.title = `${this.title}`;
       }
     },
-    processTimerStop(timer) {
-      if(timer.getCurrentTime() === 0) {
+    processTimerStop() {
+      if(pomodoroTimer.getCurrentTime() === 0) {
         this.stopTimer();
-        this.updateState(pomodoroTimer);
+        this.updateState();
         this.playAudio();
         this.resetTimer();
       }
     },
-    updateState(timer) {
+    updateState() {
       if(pomodoroTimer.getState() === 'pomodoro')
+        pomodoroTimer.setPomodoroCount(pomodoroTimer.getPomodoroCount() + 1);
+
+      if(pomodoroTimer.getState() === 'pomodoro' && pomodoroTimer.getPomodoroCount() % 4 !== 0) {
         pomodoroTimer.setState('shortbreak');
-      if(pomodoroTimer.getState() === 'shortbreak')
+      } else if(pomodoroTimer.getState() === 'pomodoro' && pomodoroTimer.getPomodoroCount() % 4 == 0) {
+        pomodoroTimer.setState('longbreak');
+      }
+      else if(pomodoroTimer.getState() === 'shortbreak')
         pomodoroTimer.setState('pomodoro');
-      if(pomodoroTimer.getState() === 'longbreak')
+      else if(pomodoroTimer.getState() === 'longbreak')
         pomodoroTimer.setState('pomodoro');
     },
     playAudio() {

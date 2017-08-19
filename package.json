@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "webpack-dev-server --hot --inline",
-    "compile": "babel src --out-dir out -w"
+    "compile": "babel src --out-dir bin -w"
   },
   "keywords": [
     "pomodoro",

@@ -29,11 +29,11 @@
             </div>
             <div class="col">
               <label for="Break Time"> Short Break </label>
-              <input id="shortBreakLength" type="number" class="form-control full-width" value="15">
+              <input id="shortBreakLength" type="number" class="form-control full-width" value="5">
             </div>
             <div class="col">             
               <label for="Break Time"> Long Break </label>
-              <input id="longBreakLength" type="number" class="form-control full-width" value="5">
+              <input id="longBreakLength" type="number" class="form-control full-width" value="15">
             </div>
           </div>
           <div class="extra-padding">
